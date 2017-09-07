@@ -36,3 +36,10 @@ compileKotlin {
 run {
     args = ["1+1"]
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'io.zachgray.kalk.MainKt'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
