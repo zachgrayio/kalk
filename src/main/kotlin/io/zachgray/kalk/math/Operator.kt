@@ -1,8 +1,14 @@
 package io.zachgray.kalk.math
 
+/**
+ * Supported operators. To add one:
+ * 1: add an Operator entry which implements `operate()`
+ * 2: add the token to the `tokens` val on the companion object.
+ */
 sealed class Operator(val stringRepresentation:String, val precedence:Int, val isRightAssociative:Boolean) {
     abstract fun operate(right:Double, left:Double):Double
 
+    // 1
     object plus : Operator(stringRepresentation = "+", precedence = 0, isRightAssociative = false) {
         override fun operate(right: Double, left: Double) = left.plus(right)
     }
@@ -28,6 +34,9 @@ sealed class Operator(val stringRepresentation:String, val precedence:Int, val i
     }
 
     companion object {
+        // 2
+        val tokens = "\\^%*+\\-"
+
         fun fromString(representation:String) = when(representation) {
             plus.stringRepresentation -> plus
             minus.stringRepresentation -> minus
