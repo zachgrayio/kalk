@@ -5,53 +5,83 @@ package io.zachgray.kalk.math
  * 1: add an Operator entry which implements `operate()`
  * 2: add the token to the `tokens` val on the companion object.
  */
-sealed class Operator(val stringRepresentation:String, val precedence:Int, val isRightAssociative:Boolean) {
-    abstract fun operate(right:Double, left:Double):Double
+sealed class Operator(
+    val stringRepresentation:String,
+    val precedence:Int,
+    val isRightAssociative:Boolean,
+    val operateFunc: (left: Double, right: Double) -> Double
+) {
+    fun operate(right:Double, left:Double):Double = operateFunc(left, right)
 
     // 1
-    object eq : Operator(stringRepresentation = "=", precedence = 0, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double): Double = if(left == right) 1.0 else 0.0
-    }
+    object eq : Operator(
+        stringRepresentation = "=",
+        precedence = 0,
+        isRightAssociative = false,
+        operateFunc = { left, right -> if(left == right) 1.0 else 0.0 }
+    )
 
-    object leq : Operator(stringRepresentation = "<=", precedence = 0, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double): Double = if(left <= right) 1.0 else 0.0
-    }
+    object leq : Operator(
+        stringRepresentation = "<=",
+        precedence = 0,
+        isRightAssociative = false,
+        operateFunc = { left, right -> if (left <= right) 1.0 else 0.0 })
 
-    object geq : Operator(stringRepresentation = ">=", precedence = 0, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double): Double = if(left >= right) 1.0 else 0.0
-    }
+    object geq : Operator(
+        stringRepresentation = ">=",
+        precedence = 0,
+        isRightAssociative = false,
+        operateFunc = { left, right -> if(left >= right) 1.0 else 0.0 })
 
-    object lt : Operator(stringRepresentation = "<", precedence = 0, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double): Double = if(left < right) 1.0 else 0.0
-    }
+    object lt : Operator(
+        stringRepresentation = "<",
+        precedence = 0,
+        isRightAssociative = false,
+        operateFunc = { left, right -> if(left < right) 1.0 else 0.0 })
 
-    object gt : Operator(stringRepresentation = ">", precedence = 0, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double): Double = if(left > right) 1.0 else 0.0
-    }
+    object gt : Operator(
+        stringRepresentation = ">",
+        precedence = 0,
+        isRightAssociative = false,
+        operateFunc = { left, right -> if(left > right) 1.0 else 0.0 })
 
-    object plus : Operator(stringRepresentation = "+", precedence = 1, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double) = left.plus(right)
-    }
 
-    object minus : Operator(stringRepresentation = "-", precedence = 1, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double) = left.minus(right)
-    }
+    object plus : Operator(
+        stringRepresentation = "+",
+        precedence = 1,
+        isRightAssociative = false,
+        operateFunc = { left, right -> left.plus(right) })
 
-    object times : Operator(stringRepresentation = "*", precedence = 2, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double) = left.times(right)
-    }
+    object minus : Operator(
+        stringRepresentation = "-",
+        precedence = 1,
+        isRightAssociative = false,
+        operateFunc = { left, right -> left.minus(right) })
 
-    object div : Operator(stringRepresentation = "/", precedence = 2, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double) = left.div(right)
-    }
+    object times : Operator(
+        stringRepresentation = "*",
+        precedence = 2,
+        isRightAssociative = false,
+        operateFunc = { left, right -> left.times(right) })
 
-    object mod : Operator(stringRepresentation = "%", precedence = 2, isRightAssociative = false) {
-        override fun operate(right: Double, left: Double) = left.rem(right)
-    }
+    object div : Operator(
+        stringRepresentation = "/",
+        precedence = 2,
+        isRightAssociative = false,
+        operateFunc = { left, right -> left.div(right) })
 
-    object pow : Operator(stringRepresentation = "^", precedence = 3, isRightAssociative = true) {
-        override fun operate(right: Double, left: Double) = Math.pow(left, right)
-    }
+    object mod : Operator(
+        stringRepresentation = "%",
+        precedence = 2,
+        isRightAssociative = false,
+        operateFunc = { left, right -> left.rem(right) })
+
+    object pow : Operator(
+        stringRepresentation = "^",
+        precedence = 3,
+        isRightAssociative = true,
+        operateFunc = { left, right -> Math.pow(left, right) }
+    )
 
     companion object {
         // 2
