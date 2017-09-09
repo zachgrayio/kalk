@@ -4,7 +4,7 @@ A CLI calculator written in Kotlin.
 
 ### Installation
 
-- Install with NPM: `$ npm i -g kalk` (NPM release coming soon!)
+- Install with NPM: `$ npm i -g kalk`
 
 ### Usage
 
