@@ -10,7 +10,7 @@ class RPNExpression(val expression:String, val operators:MutableList<Operator>, 
         val stack = this
         expression
             // clean
-            .replace("[^\\^*+\\-\\d/\\s]".toRegex(), "")
+            .replace("[^${Operator.tokens}\\d/\\s]".toRegex(), "")
             // split
             .split("\\s".toRegex())
             // drop empties
