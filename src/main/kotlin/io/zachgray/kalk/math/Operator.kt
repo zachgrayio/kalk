@@ -1,4 +1,4 @@
-package example.math
+package io.zachgray.kalk.math
 
 sealed class Operator(val stringRepresentation:String, val precedence:Int, val isRightAssociative:Boolean) {
     abstract fun operate(right:Double, left:Double):Double

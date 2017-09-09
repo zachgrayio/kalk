@@ -1,7 +1,7 @@
-package example.math.ext
+package io.zachgray.kalk.math.ext
 
-import example.math.Operator
-import example.math.RPNExpression
+import io.zachgray.kalk.math.Operator
+import io.zachgray.kalk.math.RPNExpression
 import java.util.*
 
 /**

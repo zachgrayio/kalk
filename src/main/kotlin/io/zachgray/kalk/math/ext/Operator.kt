@@ -1,6 +1,6 @@
-package example.math.ext
+package io.zachgray.kalk.math.ext
 
-import example.math.Operator
+import io.zachgray.kalk.math.Operator
 
 operator fun Operator.compareTo(other: Operator):Int {
     return when {
