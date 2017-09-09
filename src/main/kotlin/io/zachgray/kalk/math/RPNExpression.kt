@@ -1,4 +1,4 @@
-package example.math
+package io.zachgray.kalk.math
 
 import java.util.*
 

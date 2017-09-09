@@ -1,6 +1,6 @@
 package io.zachgray.kalk
 
-import example.math.ext.toRPNExpression
+import io.zachgray.kalk.math.ext.toRPNExpression
 import io.zachgray.cmdloop.commandLoop
 
 fun main(args:Array<String>) {

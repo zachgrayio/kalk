@@ -1,4 +1,4 @@
-package example.math
+package io.zachgray.kalk.math
 
 sealed class Operator(val stringRepresentation:String, val precedence:Int, val isRightAssociative:Boolean) {
     abstract fun operate(right:Double, left:Double):Double
@@ -19,6 +19,10 @@ sealed class Operator(val stringRepresentation:String, val precedence:Int, val i
         override fun operate(right: Double, left: Double) = left.div(right)
     }
 
+    object mod : Operator(stringRepresentation = "%", precedence = 1, isRightAssociative = false) {
+        override fun operate(right: Double, left: Double) = left.rem(right)
+    }
+
     object pow : Operator(stringRepresentation = "^", precedence = 2, isRightAssociative = true) {
         override fun operate(right: Double, left: Double) = Math.pow(left, right)
     }
@@ -29,6 +33,7 @@ sealed class Operator(val stringRepresentation:String, val precedence:Int, val i
             minus.stringRepresentation -> minus
             times.stringRepresentation -> times
             div.stringRepresentation -> div
+            mod.stringRepresentation -> mod
             pow.stringRepresentation -> pow
             else -> null
         }
