@@ -42,7 +42,7 @@ fun main(args:Array<String>) {
             { input ->
                 input?.let {
                     val expression = it.toRPNExpression()
-                    val result = expression.evaluate(lastResult)
+                    val result = expression.evaluate(seed = lastResult)
                     lastResult = result
                     println("  $result")
                 }
