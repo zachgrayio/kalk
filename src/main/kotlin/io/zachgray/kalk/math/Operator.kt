@@ -10,7 +10,7 @@ package io.zachgray.kalk.math
 sealed class Operator(val stringRepresentation:String, val precedence:Int, val isRightAssociative:Boolean) {
     companion object {
         // 1
-        val tokens = "><=\\^%*+\\-"
+        val tokens = ".><=\\^%*+\\-"
         // 2
         fun fromString(representation:String) = when(representation) {
             eq.stringRepresentation -> eq

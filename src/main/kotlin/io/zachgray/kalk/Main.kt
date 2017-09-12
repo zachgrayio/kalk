@@ -7,6 +7,7 @@ import java.util.*
 fun main(args:Array<String>) {
     if(!args.isEmpty()) return println(args.joinToString(" ").toRPNExpression().evaluate())
     commandLoop {
+        var lastResult:Double? = null
         welcomeMessage {
             "Hi! Enter a mathematical expression to be evaluated, or enter a command."
         }
@@ -28,7 +29,11 @@ fun main(args:Array<String>) {
                     intParams.size == 1 -> intParams.first()
                     else -> 100
                 }
-                println("  ${Random().nextInt(max + 1 - min).plus(min)}")
+                lastResult = when {
+                    min == 0 && max == 1 -> Math.random()
+                    else -> Random().nextInt(max + 1 - min).plus(min).toDouble()
+                }
+                println("  $lastResult")
             } catch(t:Throwable) {
                 println("  invalid parameters. usage: /random 1 10")
             }
@@ -37,7 +42,9 @@ fun main(args:Array<String>) {
             { input ->
                 input?.let {
                     val expression = it.toRPNExpression()
-                    println("  ${expression.evaluate()}")
+                    val result = expression.evaluate(lastResult)
+                    lastResult = result
+                    println("  $result")
                 }
             }
         }

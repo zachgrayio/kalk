@@ -6,8 +6,9 @@ class RPNExpression(val expression:String, val operators:MutableList<Operator>, 
     /**
      * Evaluate a RPN expression string and return the result
      */
-    fun evaluate(): Double = LinkedList<Double>().apply {
+    fun evaluate(lastResult:Double? = null): Double = LinkedList<Double>().apply {
         val stack = this
+        lastResult?.let { stack.push(it) }
         expression
             // clean
             .replace("[^${Operator.tokens}\\d/\\s]".toRegex(), "")

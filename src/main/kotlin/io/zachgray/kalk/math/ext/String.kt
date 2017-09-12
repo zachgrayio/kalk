@@ -14,7 +14,7 @@ fun String.toRPNExpression(): RPNExpression = this
     .split(Regex("\\s"))
     .filterNot { it.isEmpty() }
     // tokenize - second pass: split numbers and non numbers
-    .flatMap { it ->  it.split(Regex("(?<=\\D)(?=\\d)|(?<=\\d)(?=\\D)")) }
+    .flatMap { it ->  it.split(Regex("(?<=\\D.D)(?=\\d.d)|(?<=\\d.d)(?=\\D.D)")) }
     // process tokens
     .let { tokens ->
         val output = StringBuilder()
