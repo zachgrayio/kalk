@@ -7,15 +7,10 @@ package io.zachgray.kalk.math
  * 3: add an Operator entry with operator metadata
  * 4: expand `operate` function with operator impl
  */
-sealed class Operator(
-    val stringRepresentation:String,
-    val precedence:Int,
-    val isRightAssociative:Boolean
-) {
+sealed class Operator(val stringRepresentation:String, val precedence:Int, val isRightAssociative:Boolean) {
     companion object {
         // 1
         val tokens = "><=\\^%*+\\-"
-
         // 2
         fun fromString(representation:String) = when(representation) {
             eq.stringRepresentation -> eq
@@ -32,9 +27,6 @@ sealed class Operator(
             else -> null
         }
     }
-
-    override fun toString(): String = stringRepresentation
-
     // 3
     object eq :     Operator(stringRepresentation = "=",  precedence = 0, isRightAssociative = false)
     object leq :    Operator(stringRepresentation = "<=", precedence = 0, isRightAssociative = false)
@@ -47,7 +39,6 @@ sealed class Operator(
     object div :    Operator(stringRepresentation = "/",  precedence = 2, isRightAssociative = false)
     object mod :    Operator(stringRepresentation = "%",  precedence = 2, isRightAssociative = false)
     object pow :    Operator(stringRepresentation = "^",  precedence = 3, isRightAssociative = true)
-
     // 4
     fun operate(right:Double, left:Double):Double = when(this) {
         is eq ->    if(left == right)   1.0 else 0.0
@@ -62,4 +53,5 @@ sealed class Operator(
         is mod ->   left.rem(right)
         is pow ->   Math.pow(left, right)
     }
+    override fun toString(): String = stringRepresentation
 }
