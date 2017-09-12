@@ -28,7 +28,7 @@ sealed class Operator(val stringRepresentation:String, val precedence:Int, val i
         }
     }
     // 3
-    object eq :     Operator(stringRepresentation = "=",  precedence = 0, isRightAssociative = false)
+    object eq :     Operator(stringRepresentation = "==",  precedence = 0, isRightAssociative = false)
     object leq :    Operator(stringRepresentation = "<=", precedence = 0, isRightAssociative = false)
     object geq :    Operator(stringRepresentation = ">=", precedence = 0, isRightAssociative = false)
     object lt :     Operator(stringRepresentation = "<",  precedence = 0, isRightAssociative = false)
