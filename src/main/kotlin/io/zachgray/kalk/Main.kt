@@ -3,11 +3,15 @@ package io.zachgray.kalk
 import io.zachgray.kalk.math.ext.toRPNExpression
 import io.zachgray.cmdloop.commandLoop
 import java.util.*
+import kotlin.collections.HashMap
 
 fun main(args:Array<String>) {
     if(!args.isEmpty()) return println(args.joinToString(" ").toRPNExpression().evaluate())
     commandLoop {
+        // state
         var lastResult:Double? = null
+        val variables = HashMap<String, Double>()
+
         welcomeMessage {
             "Hi! Enter a mathematical expression to be evaluated, or enter a command."
         }
@@ -41,10 +45,29 @@ fun main(args:Array<String>) {
         default {
             { input ->
                 input?.let {
-                    val expression = it.toRPNExpression()
-                    val result = expression.evaluate(seed = lastResult)
-                    lastResult = result
-                    println("  $result")
+                    val parts = it.split("\\s=|=".toRegex())
+                    val variable = parts.firstOrNull()
+                    // if variables are defined, inject their values and evaluate expression, otherwise just evaluate
+                    fun evaluate(expressionString:String):Double {
+                        var injectedExpressionString:String? = null
+                        variables.keys.forEach { k ->
+                            injectedExpressionString = expressionString.replace("$k\\s|\\s$k\\s|$k".toRegex(), " ${variables[k]} ")//todo: better matching
+                        }
+                        return (injectedExpressionString ?: expressionString).toRPNExpression().evaluate(seed = lastResult)
+
+                    }
+                    // assignment
+                    if(parts.size > 1 && variable != null) {
+                        val result = evaluate(parts.last())
+                        variables[variable] = result
+                        println("  $variable = $result")
+                    }
+                    // not assignment
+                    else {
+                        val result = evaluate(it)
+                        lastResult = result
+                        println("  $result")
+                    }
                 }
             }
         }
