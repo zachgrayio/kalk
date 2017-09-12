@@ -36,72 +36,17 @@ sealed class Operator(
     override fun toString(): String = stringRepresentation
 
     // 3
-    object eq : Operator(
-        stringRepresentation = "=",
-        precedence = 0,
-        isRightAssociative = false
-    )
-
-    object leq : Operator(
-        stringRepresentation = "<=",
-        precedence = 0,
-        isRightAssociative = false
-    )
-
-    object geq : Operator(
-        stringRepresentation = ">=",
-        precedence = 0,
-        isRightAssociative = false
-    )
-
-    object lt : Operator(
-        stringRepresentation = "<",
-        precedence = 0,
-        isRightAssociative = false
-    )
-
-    object gt : Operator(
-        stringRepresentation = ">",
-        precedence = 0,
-        isRightAssociative = false
-    )
-
-
-    object plus : Operator(
-        stringRepresentation = "+",
-        precedence = 1,
-        isRightAssociative = false
-    )
-
-    object minus : Operator(
-        stringRepresentation = "-",
-        precedence = 1,
-        isRightAssociative = false
-    )
-
-    object times : Operator(
-        stringRepresentation = "*",
-        precedence = 2,
-        isRightAssociative = false
-    )
-
-    object div : Operator(
-        stringRepresentation = "/",
-        precedence = 2,
-        isRightAssociative = false
-    )
-
-    object mod : Operator(
-        stringRepresentation = "%",
-        precedence = 2,
-        isRightAssociative = false
-    )
-
-    object pow : Operator(
-        stringRepresentation = "^",
-        precedence = 3,
-        isRightAssociative = true
-    )
+    object eq :     Operator(stringRepresentation = "=",  precedence = 0, isRightAssociative = false)
+    object leq :    Operator(stringRepresentation = "<=", precedence = 0, isRightAssociative = false)
+    object geq :    Operator(stringRepresentation = ">=", precedence = 0, isRightAssociative = false)
+    object lt :     Operator(stringRepresentation = "<",  precedence = 0, isRightAssociative = false)
+    object gt :     Operator(stringRepresentation = ">",  precedence = 0, isRightAssociative = false)
+    object plus :   Operator(stringRepresentation = "+",  precedence = 1, isRightAssociative = false)
+    object minus :  Operator(stringRepresentation = "-",  precedence = 1, isRightAssociative = false)
+    object times :  Operator(stringRepresentation = "*",  precedence = 2, isRightAssociative = false)
+    object div :    Operator(stringRepresentation = "/",  precedence = 2, isRightAssociative = false)
+    object mod :    Operator(stringRepresentation = "%",  precedence = 2, isRightAssociative = false)
+    object pow :    Operator(stringRepresentation = "^",  precedence = 3, isRightAssociative = true)
 
     // 4
     fun operate(right:Double, left:Double):Double = when(this) {
